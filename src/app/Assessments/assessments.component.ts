@@ -3,11 +3,11 @@ import { ActivatedRoute} from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-students',
-  templateUrl: './students.component.html',
-  styleUrls: [ './students.component.css' ]
+  selector: 'app-assessments',
+  templateUrl: './assessments.component.html',
+  styleUrls: [ './assessments.component.css' ]
 })
-export class StudentsComponent implements OnInit {
+export class AssessmentsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private location: Location
@@ -21,7 +21,7 @@ export class StudentsComponent implements OnInit {
     this.location.back();
   }
 
-  findStudent(): void {
-// найти студента по имени
+  findAssessments(): void {
+// найти assessment по имени студента
   }
 }
