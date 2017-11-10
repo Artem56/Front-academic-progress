@@ -3,7 +3,20 @@
 
 <h2>This is students page</h2>
 
-<h3>Сюда подгрузить таблицу студентов</h3>
+<ul>
+  <li *ngFor="let student of students">
+    <table style="width:100%">
+      <tr>
+        <th>id</th>
+        <th>name</th>
+      </tr>
+      <tr>
+        <td>{{student.studentId}}</td>
+        <td>{{student.fullName}}</td>
+      </tr>
+    </table>
+  </li>
+</ul>
 
 <button (click)="goBack()">Back</button>
 <button (click)="findStudent()">findStudent</button>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { Location } from '@angular/common';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-faculties',
@@ -10,11 +11,18 @@ import { Location } from '@angular/common';
 export class FacultiesComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private http: HttpClient
   ) {}
 
-  ngOnInit(): void {
+  faculties: any;
 
+  ngOnInit(): void {
+    console.log('Init');
+    this.http.get('http://localhost:8090/getAllFaculties').subscribe(data => {
+      console.log(data);
+      this.faculties = data;
+    });
   }
 
   goBack(): void {

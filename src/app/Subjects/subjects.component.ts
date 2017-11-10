@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { Location } from '@angular/common';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-subjects',
@@ -10,11 +11,18 @@ import { Location } from '@angular/common';
 export class SubjectsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private http: HttpClient
   ) {}
 
-  ngOnInit(): void {
+  subjects: any;
 
+  ngOnInit(): void {
+    console.log('Init');
+    this.http.get('http://localhost:8090/getAllSubjects').subscribe(data => {
+      console.log(data);
+      this.subjects = data;
+    });
   }
 
   goBack(): void {
