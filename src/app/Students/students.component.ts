@@ -19,7 +19,11 @@ export class StudentsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('Init');
-    this.http.get('http://localhost:8090/getAllStudents').subscribe(data => {
+    this.http.get('http://localhost:8090/getAllStudents', {
+      headers: {
+        'Test': 'test'
+      }
+    }).subscribe(data => {
       console.log(data);
       this.students = data;
     });
