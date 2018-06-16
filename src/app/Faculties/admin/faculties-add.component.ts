@@ -4,12 +4,13 @@ import { Location } from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
+import {routes} from "../../routes";
+import {isNullOrUndefined} from "util";
 
-// TODO убрать все одинаоквые css и сделать ссылку на один
 @Component({
   selector: 'app-faculties-add',
   templateUrl: './faculties-add.component.html',
-  styleUrls: [ './faculties-add.component.css' ]
+  styleUrls: [ '../faculties.component.css' ]
 })
 export class FacultiesAddComponent {
   constructor(
@@ -23,12 +24,18 @@ export class FacultiesAddComponent {
   facultyNum: string;
   facultyName: string;
 
-  add(): void {
-    this.http.get(`http://localhost:8090/addFaculty?facultyId=` + this.facultyId +
-      `&facultyNum=` + this.facultyNum + `&facultyName=` + this.facultyName).subscribe(data => {
+  addFaculty(): void {
+    if (isNullOrUndefined(this.facultyId) || isNullOrUndefined(this.facultyNum) || isNullOrUndefined(this.facultyName)) {
+      alert('Какое-то поле не проставлено');
+      return;
+    }
+    this.http.get(`${routes.gateway}/addFaculty?facultyId=${this.facultyId}&facultyNum=${this.facultyNum}&facultyName=${this.facultyName}`).subscribe(data => {
       console.log(data);
       this.faculties = data;
     });
+    this.facultyId = '';
+    this.facultyNum = '';
+    this.facultyName = '';
   }
 
   goBack(): void {
